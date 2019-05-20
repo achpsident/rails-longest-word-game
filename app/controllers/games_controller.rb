@@ -8,6 +8,7 @@ class GamesController < ApplicationController
   LEWAGON_URL = "https://wagon-dictionary.herokuapp.com/"
 
   def new
+    session[:high_score] = 0 unless session[:high_score]
     alphabet = ("a".."z").to_a
     grid_array = []
     (grid_array << alphabet.sample) until grid_array.length >= 9
@@ -28,8 +29,6 @@ class GamesController < ApplicationController
   end
 
   private
-
-
 
   def not_word?(word)
     response = open("#{LEWAGON_URL}#{word}").read

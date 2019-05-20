@@ -2,14 +2,13 @@
 <% if @response == "a word" %>
   <p><bold>Congratulations!</bold> <%= @guess.upcase %> is a valid English word!</p>
   <p> Your score is <%= @guess.length %></p>
+  <% session[:high_score] = @guess.length if @guess.length > session[:high_score] %>
 <% elsif response == "not word" %>
   <p>Sorry, but <%= @guess.upcase %> does not seem to be a valid English word...</p>
 <% else %>
   <p>Sorry, but <%= @guess.upcase %> can't be built out of <%= @letters %>s</p>
 <% end %>
 
-
-
-
+<p> High score: <%= session[:high_score] %></p>
 <%= link_to "Play again", new_path %>
 
