@@ -1,4 +1,15 @@
 <h1>Response</h1>
+<% if @response == "a word" %>
+  <p><bold>Congratulations!</bold> <%= @guess.upcase %> is a valid English word!</p>
+  <p> Your score is <%= @guess.length %></p>
+<% elsif response == "not word" %>
+  <p>Sorry, but <%= @guess.upcase %> does not seem to be a valid English word...</p>
+<% else %>
+  <p>Sorry, but <%= @guess.upcase %> can't be built out of <%= @letters %>s</p>
+<% end %>
 
 
+
+
+<%= link_to "Play again", new_path %>
 

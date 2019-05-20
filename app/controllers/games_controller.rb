@@ -15,37 +15,33 @@ class GamesController < ApplicationController
   end
 
   def score
-    raise
-    guess = params(:guess)
-    letters = params(:letters)
-    @response = "not word" if not_word(guess)
-    if word_in_grid?(guess, letters)
-      @response ="a word}"
+    # raise
+    @guess = params[:guess]
+    @letters = params[:letters]
+    @response = "not word" if not_word?(@guess)
+    if word_in_grid?(@guess, @letters)
+      @response = "a word"
     else
-      @response ="not in grid"
+      @response = "not in grid"
     end
-
-
-
-    @response =
+   # raise
   end
 
   private
 
 
 
-  def check_if_a_word(word)
+  def not_word?(word)
     response = open("#{LEWAGON_URL}#{word}").read
     response["error"]
   end
 
   def word_in_grid?(attempt, grid)
-    # grid2 = grid.clone
-    letters= attempt.split(" ")
-    letters.each do |char|
-      new_array.delete_at(new_array.find_index(char)) if new_array.find_index(char)
+    letters = attempt.split("")
+    grid.split(" ").each do |char|
+      letters.delete_at(letters.find_index(char)) if letters.find_index(char)
     end
-    new_array.empty?
+    letters.empty?
   end
 
 
